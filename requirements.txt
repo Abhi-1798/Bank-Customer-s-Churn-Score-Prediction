@@ -1,8 +1,7 @@
-xgboost
-numpy
-pandas
-pickle
+streamlit==1.45.1
+streamlit-authenticator==0.2.3
+pandas==2.2.3
+scikit-learn==1.5.0
+xgboost==3.0.0
+numpy==1.26.4
 joblib
-scikit-learn
-streamlit
-streamlit-authenticator
