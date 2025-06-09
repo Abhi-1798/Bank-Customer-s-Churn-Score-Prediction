@@ -1,6 +1,8 @@
-
+xgboost
+numpy
 pandas
 pickle
+joblib
 scikit-learn
 streamlit
 streamlit-authenticator
