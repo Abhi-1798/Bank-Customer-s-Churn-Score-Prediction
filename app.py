@@ -1,5 +1,6 @@
 import streamlit as st
 import joblib
+import pickle
 import pandas as pd
 import numpy as np
 
@@ -25,7 +26,8 @@ if not st.session_state.authenticated:
 # ------------------ Load Model ------------------
 @st.cache_resource
 def load_model():
-    return joblib.load("XGBClass_model_bundle.pkl")
+    with open("XGBClass_model_bundle.pkl", "rb") as f:
+        return pickle.load(f)
 
 bundle = load_model()
 ohe = bundle['ohe']
@@ -39,32 +41,26 @@ st.subheader("Enter Customer Details")
 
 # Define input fields based on dataset columns
 data_input = {
-    "customer_id": st.text_input("Customer ID"),
-    "Name": st.text_input("Customer Name"),
     "age": st.number_input("Age", min_value=10, max_value=100, step=1),
-    "gender": st.selectbox("Gender", ["Male", "Female"]),
-    "security_no": st.text_input("Security Number"),
-    "region_category": st.selectbox("Region Category", ["City", "Town", "Village", ""]),
-    "membership_category": st.selectbox("Membership Category", ["Basic", "Silver", "Gold", "Platinum", "Premium", "No Membership"]),
-    "joining_date": st.date_input("Joining Date").strftime("%Y-%m-%d"),
+    "gender": st.selectbox("Gender", ["F", "M", "Unknown"]),
+    "region_category": st.selectbox("Region Category", ["City", "Town", "Village", "Unknown"]),
+    "membership_category": st.selectbox("Membership Category", ["Basic Membership", "Silver Membership", "Gold Membership", "Platinum Membership", "Premium Membership", "No Membership"]),
     "joined_through_referral": st.selectbox("Joined Through Referral", ["Yes", "No", "?"]),
-    "referral_id": st.text_input("Referral ID"),
-    "preferred_offer_types": st.selectbox("Preferred Offer Types", ["Credit/Debit Card Offer", "Gift Voucher/Coupon Offer", "No Offer", ""]),
-    "medium_of_operation": st.selectbox("Medium of Operation", ["Dekstop", "Smartphone", "Both", "?"]),
-    "internet_option": st.selectbox("Internet Option", ["Wifi", "Mobile Data", "Optic Fiber"]),
-    "last_visit_time": st.number_input("Last Visit Time (24-hour format)", min_value=0, max_value=23),
-    "days_since_last_login": st.number_input("Days Since Last Login", min_value=-999),
-    "avg_time_spent": st.number_input("Average Time Spent (seconds)", min_value=0.0),
+    "preferred_offer_types": st.selectbox("Preferred Offer Types", ["Credit/Debit Card Offers", "Gift Vouchers/Coupons", "Without Offers"]),
+    "medium_of_operation": st.selectbox("Medium of Operation", ["Desktop", "Smartphone", "Both", "?"]),
+    "internet_option": st.selectbox("Internet Option", ["Wi-Fi", "Mobile_Data", "Fiber_Optic"]),
+    "days_since_last_login": st.number_input("Days Since Last Login", min_value=0, max_value=28),
+    "avg_time_spent": st.number_input("Average Time Spent (In seconds)", min_value=0.0),
     "avg_transaction_value": st.number_input("Average Transaction Value", min_value=0.0),
     "avg_frequency_login_days": st.number_input("Avg Frequency Login Days", min_value=0.0),
-    "points_in_wallet": st.number_input("Points in Wallet"),
+    "points_in_wallet": st.number_input("Points in Wallet", min_value=0.0),
     "used_special_discount": st.selectbox("Used Special Discount", ["Yes", "No"]),
     "offer_application_preference": st.selectbox("Offer Application Preference", ["Yes", "No"]),
     "past_complaint": st.selectbox("Past Complaint", ["Yes", "No"]),
-    "complaint_status": st.selectbox("Complaint Status", ["Solved", "Unsolved", "Solved in Follow-up", "Not Applicable", "No Info Available"]),
+    "complaint_status": st.selectbox("Complaint Status", ["Solved", "Unsolved", "Solved in Follow-up", "Not Applicable", "No Information Available"]),
     "feedback": st.selectbox("Feedback", [
-        "No reason specified", "User-friendly website", "Reasonable Price", "Quality Customer care",
-        "Products always in stock", "Poor Customer Service", "Poor Product Quality", "Poor Website", "Too many ads"
+        "No reason specified", "User Friendly Website", "Reasonable Price", "Quality Customer Care",
+        "Products always in Stock", "Poor Customer Service", "Poor Product Quality", "Poor Website", "Too many ads"
     ])
 }
 
@@ -86,5 +82,6 @@ final_input = processed_df[selected_features]
 
 # Make prediction
 if st.button("Predict"):
+    
     prediction = model.predict(final_input)[0]
     st.success(f"Predicted Churn Risk Score: {prediction}")
