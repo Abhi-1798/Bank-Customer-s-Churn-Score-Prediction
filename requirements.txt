@@ -1,0 +1,6 @@
+
+pandas
+pickle
+scikit-learn
+streamlit
+streamlit-authenticator
