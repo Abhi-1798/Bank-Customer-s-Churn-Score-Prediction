@@ -44,7 +44,7 @@ if auth_status:
 
     # Add Logo or Image Banner
     image = Image.open("churn banner.png")  # Add your image file to the directory
-    st.image(image, use_column_width=True)
+    st.image(image, use_container_width=True)
 
     # Streamlit UI
     st.title("📊 Customer Churn Prediction")
@@ -55,7 +55,7 @@ if auth_status:
     col1, col2 = st.columns(2)
 
     with col1:
-        age = st.number_input("Age of Customer", min_value=10, max_value=100, step=1)
+        age = st.slider("Age of Customer", min_value=10, max_value=100, step=1)
         gender = st.selectbox("Gender of Customer", ["F", "M", "Unknown"])
         region_category = st.selectbox("Region Category", ["City", "Town", "Village", "Unknown"])
         membership_category = st.selectbox("Membership Category", ["Basic Membership", "Silver Membership", "Gold Membership", "Platinum Membership", "Premium Membership", "No Membership"])
@@ -63,12 +63,12 @@ if auth_status:
         preferred_offer_types = st.selectbox("Preferred Offer Types", ["Credit/Debit Card Offers", "Gift Vouchers/Coupons", "Without Offers"])
         medium_of_operation = st.selectbox("Medium of Operation", ["Desktop", "Smartphone", "Both", "?"])
         internet_option = st.selectbox("Internet Option", ["Wi-Fi", "Mobile_Data", "Fiber_Optic"])
+        days_since_last_login = st.slider("Days Since Last Login", min_value=0, max_value=28)
 
     with col2:
-        days_since_last_login = st.number_input("Days Since Last Login", min_value=0, max_value=28)
         avg_time_spent = st.number_input("Average Time Spent (In seconds)", min_value=0.0)
         avg_transaction_value = st.number_input("Average Transaction Value", min_value=0.0)
-        avg_frequency_login_days = st.number_input("Avg Frequency Login Days", min_value=0.0)
+        avg_frequency_login_days = st.slider("Avg Frequency Login Days", min_value=0, max_value=75)
         points_in_wallet = st.number_input("Points in Wallet", min_value=0.0)
         used_special_discount = st.selectbox("Used Special Discount", ["Yes", "No"])
         offer_application_preference = st.selectbox("Offer Application Preference", ["Yes", "No"])
