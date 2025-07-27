@@ -42,7 +42,7 @@ By analyzing customer demographics, usage behavior, and feedback, the model iden
 - View the predicted value immediately
 
 ## 📁 Deployment
-The app is live and accessible at: 🔗 https://bank-customer-churn-eda-deployment.onrender.com/
+The app is live and accessible at: 🔗 https://bank-customer-s-churn-score-prediction.onrender.com/
 
 **User Name:** abhishek       
 **Password:** 1234567
