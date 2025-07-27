@@ -33,3 +33,16 @@ By analyzing customer demographics, usage behavior, and feedback, the model iden
 - **Model Serialization:** `joblib` for saving XGBoost model with preprocessing pipeline  
 
 ---
+
+## 📦 How to Use
+
+- Login using your credentials
+- Enter feature values in the input form
+- Click Predict Demand
+- View the predicted value immediately
+
+## 📁 Deployment
+The app is live and accessible at: 🔗 https://bank-customer-churn-eda-deployment.onrender.com/
+
+**User Name:** abhishek 
+**Password:** 1234567
