@@ -44,5 +44,5 @@ By analyzing customer demographics, usage behavior, and feedback, the model iden
 ## 📁 Deployment
 The app is live and accessible at: 🔗 https://bank-customer-churn-eda-deployment.onrender.com/
 
-**User Name:** abhishek 
+**User Name:** abhishek       
 **Password:** 1234567
